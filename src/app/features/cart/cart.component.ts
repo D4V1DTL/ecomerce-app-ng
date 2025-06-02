@@ -79,7 +79,7 @@ export class CartComponent implements OnInit {
     this.cartService.checkout().subscribe({
       next: (res) => {
         // Suponiendo que la respuesta tiene el id de la orden creada
-        this.cartService.clearCart(); // Limpiar el carrito en localStorage
+        // Limpiar el carrito en localStorage
         const orderId = res?.order?.id;
         if (orderId) {
           location.href = `/orders/${orderId}`;
