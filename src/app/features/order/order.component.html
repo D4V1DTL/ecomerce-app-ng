@@ -1,0 +1,106 @@
+<div class="container-custom py-8">
+  <h1 class="text-3xl font-bold mb-8">Carrito de Compras</h1>
+
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Items del carrito -->
+    <div class="lg:w-2/3">
+      <div
+        *ngIf="loading"
+        class="bg-white rounded-lg shadow-md p-6 mb-6 animate-pulse"
+      >
+        <div
+          *ngFor="let i of [1, 2, 3]"
+          class="flex py-6 border-b border-gray-200 last:border-b-0"
+        >
+          <div class="h-24 w-24 bg-gray-200 rounded-md"></div>
+          <div class="ml-4 flex-1">
+            <div class="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+            <div class="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
+            <div class="h-4 bg-gray-200 rounded w-1/3"></div>
+          </div>
+          <div class="w-1/4">
+            <div class="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+            <div class="h-8 bg-gray-200 rounded w-full"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estado carrito vacío -->
+      <div
+        *ngIf="!loading && orders.length === 0"
+        class="bg-white rounded-lg shadow-md p-8 mb-6 text-center"
+      >
+        <div class="text-gray-400 text-5xl mb-4">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <h2 class="text-xl font-semibold mb-2">No tienes Pedidos</h2>
+        <p class="text-gray-600 mb-6">
+          Parece que aún no has añadido ningún Pedido.
+        </p>
+        <a routerLink="/catalog" class="btn-primary px-6 py-2">
+          Comenzar a Comprar
+        </a>
+      </div>
+
+      <!-- Lista de items en el carrito -->
+      <div
+        *ngIf="!loading && orders.length > 0"
+        class="bg-white rounded-lg shadow-md overflow-hidden mb-6"
+      >
+        <!-- Encabezados del carrito -->
+        <div
+          class="grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 text-gray-600 text-sm font-medium border-b"
+        >
+          <div class="col-span-6">N° ORDEN</div>
+          <div class="col-span-2 text-center">SUB TOTAL</div>
+          <div class="col-span-2 text-center">IGV</div>
+          <div class="col-span-2 text-right">TOTAL</div>
+        </div>
+
+        <!-- Item del carrito -->
+        <div
+          *ngFor="let item of orders"
+          class="grid grid-cols-12 gap-4 px-6 py-4 border-b border-gray-200 items-center"
+        >
+          <!-- Información del producto -->
+          <div class="col-span-6">
+            <div class="flex items-center">
+              <!-- Detalles del producto -->
+              <div class="ml-4">
+                <a
+                  [routerLink]="['/orders', item.id]"
+                  class="font-medium text-gray-800 hover:text-primary-600 transition-colors"
+                >
+                  000{{ item.id }}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Precio -->
+          <div class="col-span-2 flex justify-center">
+            <span class="flex items-center">
+              {{ item.sub_total | number : "1.2-2" }}
+            </span>
+          </div>
+
+          <!-- Cantidad -->
+          <div class="col-span-2 flex justify-center">
+            <div class="flex items-center">
+              {{ item.igv | number : "1.2-2" }}
+            </div>
+          </div>
+
+          <!-- Total y eliminar -->
+          <div class="col-span-2 text-right">
+            <div class="flex flex-col items-end">
+              <span class="font-medium">
+                {{ item.total | number : "1.2-2" }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

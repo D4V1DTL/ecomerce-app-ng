@@ -1,0 +1,82 @@
+<div class="card group h-full flex flex-col">
+  <!-- Contenedor de imagen con proporción fija -->
+  <div class="relative overflow-hidden pb-[75%]">
+    <img
+      [src]="product.image"
+      [alt]="product.name"
+      class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    />
+
+    <!-- Distintivo de descuento si está disponible -->
+    <div
+      *ngIf="product.discountPrice"
+      class="absolute top-3 left-3 bg-accent-500 text-white text-xs font-bold px-2 py-1 rounded"
+    >
+      OFERTA
+    </div>
+
+    <!-- Acciones rápidas -->
+    <div
+      class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 p-3 flex justify-between text-white transform translate-y-full transition-transform duration-300 group-hover:translate-y-0"
+    >
+      <button
+        (click)="addToCart()"
+        class="hover:text-accent-400 transition-colors"
+      >
+        <i class="fas fa-cart-plus mr-1"></i> Añadir al carrito
+      </button>
+      <button class="hover:text-accent-400 transition-colors">
+        <i class="far fa-heart"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenido de la tarjeta -->
+  <div class="p-4 flex flex-col flex-grow">
+    <!-- Categoría -->
+    <span class="text-xs font-medium text-gray-500 mb-1">{{
+      product.category_name
+    }}</span>
+
+    <!-- Nombre del producto -->
+    <h3
+      class="font-medium text-lg mb-1 hover:text-primary-600 transition-colors"
+    >
+      <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+    </h3>
+
+    <!-- Valoración -->
+    <div class="flex items-center mb-2">
+      <div class="flex text-accent-500">
+        <i
+          *ngFor="let i of [1, 2, 3, 4, 5]"
+          [class]="
+            i <= product.rating
+              ? 'fas fa-star'
+              : i <= product.rating + 0.5
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
+          "
+        >
+        </i>
+      </div>
+      <span class="text-xs text-gray-500 ml-1">{{
+        product.rating.toFixed(1)
+      }}</span>
+    </div>
+
+    <!-- Precio -->
+    <div class="mt-auto">
+      <div class="flex items-center">
+        <span
+          *ngIf="product.discountPrice"
+          class="text-gray-500 line-through mr-2"
+          >{{ product.price }}</span
+        >
+        <span class="text-lg font-bold text-primary-700">
+          {{ product.discountPrice || product.price }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

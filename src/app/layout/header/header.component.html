@@ -1,0 +1,152 @@
+<header
+  [class.scrolled]="scrolled"
+  class="fixed top-0 w-full z-50 transition-all duration-300"
+  [ngClass]="scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'"
+>
+  <div class="container-custom mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center">
+      <span class="text-2xl font-bold text-primary-600">
+        Shop<span class="text-accent-500">Smart</span>
+      </span>
+    </a>
+
+    <!-- Navigation for desktop -->
+    <nav class="hidden md:flex space-x-8">
+      <a
+        routerLink="/"
+        routerLinkActive="font-medium"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [ngClass]="
+          scrolled
+            ? 'text-gray-800 hover:text-primary-600'
+            : 'text-gray-800 hover:text-accent-300'
+        "
+        class="transition-colors duration-200"
+      >
+        Inicio
+      </a>
+      <a
+        routerLink="/catalog"
+        routerLinkActive="font-medium"
+        [ngClass]="
+          scrolled
+            ? 'text-gray-800 hover:text-primary-600'
+            : 'text-gray-800 hover:text-accent-300'
+        "
+        class="transition-colors duration-200"
+      >
+        Catalogos
+      </a>
+    </nav>
+
+    <!-- User actions -->
+    <div class="flex items-center space-x-4">
+      <!-- Cart icon with count -->
+      <a routerLink="/cart" class="relative">
+        <i class="fas fa-shopping-cart text-xl text-gray-800"></i>
+        <span
+          *ngIf="cartItemCount$ | async as count"
+          class="absolute -top-2 -right-2 bg-accent-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+        >
+          {{ count }}
+        </span>
+      </a>
+
+      <!-- User icon/login -->
+      <div class="relative group">
+        <button
+          (click)="toggleUserMenu()"
+          class="flex items-center focus:outline-none"
+        >
+          <i class="fas fa-user text-xl text-gray-800"></i>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div
+          *ngIf="showUserMenu"
+          class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
+        >
+          <ng-container
+            *ngIf="(authState$ | async)?.isAuthenticated; else unauthenticated"
+          >
+            <div class="px-4 py-2 text-sm text-gray-700 border-b">
+              Hola, {{ (authState$ | async)?.user?.name || "User" }}
+            </div>
+            <a
+              href="#"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Mi Perfil
+            </a>
+            <a
+              routerLink="/orders"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Mis Pedidos
+            </a>
+            <button
+              (click)="logout()"
+              class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Cerrar Sesión
+            </button>
+          </ng-container>
+
+          <ng-template #unauthenticated>
+            <button
+              (click)="login()"
+              class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Iniciar Sesión
+            </button>
+            <button
+              (click)="login()"
+              class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Registrarse
+            </button>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button (click)="toggleMobileMenu()" class="md:hidden focus:outline-none">
+        <i
+          class="fas"
+          [ngClass]="{ 'fa-bars': !showMobileMenu, 'fa-times': showMobileMenu }"
+          [class.text-white]="!scrolled"
+          [class.text-gray-800]="scrolled"
+        ></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    *ngIf="showMobileMenu"
+    class="md:hidden bg-white shadow-lg mt-2 py-3 px-4 absolute w-full"
+  >
+    <nav class="flex flex-col space-y-3">
+      <a
+        routerLink="/"
+        routerLinkActive="font-medium text-primary-600"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-gray-800 hover:text-primary-600"
+        (click)="showMobileMenu = false"
+      >
+        Inicio
+      </a>
+      <a
+        routerLink="/catalog"
+        routerLinkActive="font-medium text-primary-600"
+        class="text-gray-800 hover:text-primary-600"
+        (click)="showMobileMenu = false"
+      >
+        Catalogos
+      </a>
+    </nav>
+  </div>
+</header>
+<!-- Spacer for fixed header -->
+<div class="h-16 md:h-20"></div>

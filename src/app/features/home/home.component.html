@@ -1,0 +1,173 @@
+<!-- Sección Hero -->
+<section
+  class="relative bg-gradient-to-r from-primary-900 to-primary-600 text-white"
+>
+  <div class="absolute inset-0 overflow-hidden">
+    <img
+      src="https://images.pexels.com/photos/3965557/pexels-photo-3965557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      alt="Fondo Hero"
+      class="w-full h-full object-cover opacity-20"
+    />
+  </div>
+
+  <div class="container-custom relative z-10 py-20 md:py-32">
+    <div class="max-w-2xl">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">
+        Bienvenido a ShopSmart
+      </h1>
+      <p
+        class="text-xl md:text-2xl mb-8 text-gray-200 fade-in"
+        style="animation-delay: 0.1s"
+      >
+        Descubre productos de calidad a precios competitivos. Tu destino único
+        para todas tus necesidades de compra.
+      </p>
+      <div
+        class="flex flex-col sm:flex-row gap-4 fade-in"
+        style="animation-delay: 0.2s"
+      >
+        <a
+          routerLink="/catalog"
+          class="btn bg-accent-500 hover:bg-accent-600 text-white font-semibold px-6 py-3 rounded-md inline-flex items-center justify-center"
+        >
+          <span>Comprar Ahora</span>
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+        <a
+          href="#featured"
+          class="btn bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold px-6 py-3 rounded-md inline-flex items-center justify-center"
+        >
+          <span>Productos Destacados</span>
+          <i class="fas fa-star ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección de Categorías -->
+<section class="section bg-gray-50">
+  <div class="container-custom">
+    <h2 class="text-3xl font-bold text-center mb-8">Compra por Categoría</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      @for (category of categories; track category.id) {
+      <a
+        [routerLink]="'/catalog'"
+        [queryParams]="{ category_id: category.id }"
+        class="relative rounded-lg overflow-hidden shadow-md h-40 md:h-56 group"
+      >
+        <img
+          [src]="category.image"
+          [alt]="category.name"
+          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4"
+        >
+          <h3 class="text-white font-bold text-lg md:text-xl">
+            {{ category.name }}
+          </h3>
+        </div>
+      </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Sección de Productos Destacados -->
+<section id="featured" class="section bg-white">
+  <div class="container-custom">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+      <h2 class="text-3xl font-bold">Productos Destacados</h2>
+      <a
+        routerLink="/catalog"
+        class="text-primary-600 hover:text-primary-800 font-medium flex items-center mt-2 md:mt-0"
+      >
+        Ver Todos los Productos
+        <i class="fas fa-chevron-right ml-2 text-xs"></i>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <ng-container *ngIf="loading">
+        <div *ngFor="let i of [1, 2, 3]" class="animate-pulse">
+          <div class="bg-gray-200 h-48 rounded-t-lg"></div>
+          <div class="p-4 bg-white rounded-b-lg">
+            <div class="h-4 bg-gray-200 rounded mb-2"></div>
+            <div class="h-6 bg-gray-200 rounded mb-3 w-3/4"></div>
+            <div class="h-4 bg-gray-200 rounded w-1/4"></div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!loading">
+        <app-product-card
+          *ngFor="let product of featuredProducts"
+          [product]="product"
+          (addToCartEvent)="addToCart($event)"
+        >
+        </app-product-card>
+      </ng-container>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Promocional -->
+<section class="section bg-primary-50">
+  <div class="container-custom">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="flex items-center p-6 bg-white rounded-lg shadow-sm">
+        <div class="mr-4 text-primary-600 text-3xl">
+          <i class="fas fa-shipping-fast"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">Envío Gratis</h3>
+          <p class="text-gray-600">En pedidos superiores a $50</p>
+        </div>
+      </div>
+
+      <div class="flex items-center p-6 bg-white rounded-lg shadow-sm">
+        <div class="mr-4 text-primary-600 text-3xl">
+          <i class="fas fa-undo"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">Devoluciones Fáciles</h3>
+          <p class="text-gray-600">Política de devolución de 30 días</p>
+        </div>
+      </div>
+
+      <div class="flex items-center p-6 bg-white rounded-lg shadow-sm">
+        <div class="mr-4 text-primary-600 text-3xl">
+          <i class="fas fa-headset"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">Soporte 24/7</h3>
+          <p class="text-gray-600">Estamos aquí para ayudarte</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección de Newsletter -->
+<section class="section bg-gray-100">
+  <div class="container-custom text-center">
+    <h2 class="text-3xl font-bold mb-3">Únete a Nuestro Newsletter</h2>
+    <p class="text-gray-600 mb-6 max-w-xl mx-auto">
+      Suscríbete a nuestro newsletter y mantente al día con nuevos productos y
+      ofertas especiales.
+    </p>
+    <div class="flex flex-col md:flex-row justify-center max-w-md mx-auto">
+      <input
+        type="email"
+        placeholder="Tu correo electrónico"
+        class="input rounded-r-none md:rounded-r-none md:rounded-l-md px-4 py-3"
+      />
+      <button
+        class="btn-primary rounded-l-none md:rounded-l-none md:rounded-r-md mt-2 md:mt-0 flex-shrink-0"
+      >
+        Suscribirse
+      </button>
+    </div>
+  </div>
+</section>

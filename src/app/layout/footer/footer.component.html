@@ -1,0 +1,157 @@
+<footer class="bg-gray-900 text-white pt-12 pb-8">
+  <div class="container-custom mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Información de la empresa -->
+      <div class="col-span-1">
+        <h3 class="text-xl font-bold mb-4">ShopSmart</h3>
+        <p class="text-gray-400 mb-4">
+          Tu tienda única para productos de calidad a precios competitivos.
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fab fa-pinterest"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Categorías -->
+      <div class="col-span-1">
+        <h4 class="font-semibold text-lg mb-4">Categorías</h4>
+        <ul class="space-y-2">
+          <li>
+            <a
+              routerLink="/catalog"
+              [queryParams]="{ category: 'Electronics' }"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Electrónica</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/catalog"
+              [queryParams]="{ category: 'Clothing' }"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Ropa</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/catalog"
+              [queryParams]="{ category: 'Home' }"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Hogar y Jardín</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/catalog"
+              [queryParams]="{ category: 'Beauty' }"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Belleza</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/catalog"
+              [queryParams]="{ category: 'Sports' }"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Deportes</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Información -->
+      <div class="col-span-1">
+        <h4 class="font-semibold text-lg mb-4">Información</h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"
+              >Sobre Nosotros</a
+            >
+          </li>
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"
+              >Contáctanos</a
+            >
+          </li>
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"
+              >Términos y Condiciones</a
+            >
+          </li>
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"
+              >Devoluciones y Cambios</a
+            >
+          </li>
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"
+              >Envíos y Entregas</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Boletín informativo -->
+      <div class="col-span-1">
+        <h4 class="font-semibold text-lg mb-4">Boletín</h4>
+        <p class="text-gray-400 mb-4">
+          Suscríbete a nuestro boletín para recibir los últimos productos y
+          ofertas.
+        </p>
+        <div class="flex">
+          <input
+            type="email"
+            placeholder="Tu correo electrónico"
+            class="px-4 py-2 rounded-l-md w-full focus:outline-none text-gray-800"
+          />
+          <button
+            class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-r-md transition-colors"
+          >
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 mt-8 pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400">
+          © 2025 ShopSmart. Todos los derechos reservados.
+        </p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <img
+            src="https://w7.pngwing.com/pngs/648/10/png-transparent-visa-logo-credit-card-visa-debit-card-payment-card-mastercard-visa-blue-text-trademark.png"
+            alt="Visa"
+            class="h-6"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/7/72/MasterCard_early_1990s_logo.png"
+            alt="Mastercard"
+            class="h-6"
+          />
+          <img
+            src="https://images.seeklogo.com/logo-png/16/2/american-express-logo-png_seeklogo-168629.png"
+            alt="American Express"
+            class="h-6"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png"
+            alt="PayPal"
+            class="h-6"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
